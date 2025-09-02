@@ -1,0 +1,264 @@
+<!DOCTYPE >
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      body {
+        background: #e35869;
+        font-family: "Rubik", sans-serif;
+      }
+
+      .login-form {
+        background: #fff;
+        width: 500px;
+        margin: 65px auto;
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        flex-direction: column;
+        border-radius: 4px;
+        box-shadow: 0 2px 25px rgba(0, 0, 0, 0.2);
+      }
+      .login-form h1 {
+        padding: 35px 35px 0 35px;
+        font-weight: 300;
+      }
+      .login-form .content {
+        padding: 35px;
+        text-align: center;
+      }
+      .login-form .input-field {
+        padding: 12px 5px;
+      }
+      .login-form .input-field input {
+        font-size: 16px;
+        display: block;
+        font-family: "Rubik", sans-serif;
+        width: 100%;
+        padding: 10px 1px;
+        border: 0;
+        border-bottom: 1px solid #747474;
+        outline: none;
+        -webkit-transition: all 0.2s;
+        transition: all 0.2s;
+      }
+
+      .login-form .input-field input:focus {
+        border-color: #222;
+      }
+      .login-form .action button:nth-child(1) {
+        background: #2d3b55;
+        color: #fff;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 4px;
+      }
+
+      .login-form .action {
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        flex-direction: row;
+      }
+      .login-form .action button {
+        width: 100%;
+        border: none;
+        padding: 18px;
+        font-family: "Rubik", sans-serif;
+        cursor: pointer;
+        text-transform: uppercase;
+        background: #e8e9ec;
+        color: #777;
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 0;
+        letter-spacing: 0.2px;
+        outline: 0;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+      }
+
+      .login-form .action button:nth-child(1):hover {
+        background: #3c4d6d;
+      }
+    </style>
+    <script>
+      
+      function key() 
+      {
+      document.getElementById("submit").disabled = false;
+      }
+
+      function namecheck()
+      {
+        var fname = document.getElementById('FIRSTNAME').value;
+        var lname = document.getElementById('LASTNAME').value;
+        var chkname=/^[A-Za-z]+$/;
+        if(fname!='' && lname!='')
+        {
+          if(!chkname.test(fname) && !chkname.test(lname))
+          {
+            alert("Firstname And Lastname Should Not Contain Any Numbers Or Symbols")
+            document.getElementById("submit").disabled = true;
+          }
+          else 
+          {  
+            document.getElementById("submit").disabled = false;
+          }
+        }
+      }
+
+      function checkpassword() {
+      var chk_pw = document.getElementById('PASSWORD').value;
+      var pw_val =  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      if(chk_pw!='')
+      {
+      if(!pw_val.test(chk_pw))
+      {
+      alert("Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character")
+      document.getElementById("submit").disabled = true;
+      } else 
+      {  
+      document.getElementById("submit").disabled = false;
+      }  
+      }
+      }
+
+      function passwordverify() {
+        var pw1 = document.getElementById("PASSWORD").value;
+        var pw2 = document.getElementById("CPASSWORD").value;
+        if (pw1 != "" && pw2 != "") {
+          if (pw1 != pw2) {
+            alert("PASSWORD DID NOT MATCH");
+            document.getElementById("submit").disabled = true;
+          } else {
+            document.getElementById("submit").disabled = false;
+            checkpassword();
+            namecheck();
+          }
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <form action="registration store.php" method="post" class="login-form">
+      <h1>Registration</h1>
+      <div class="content">
+        <div class="input-field">
+          <input
+            type="text"
+            name="FIRSTNAME"
+            id="FIRSTNAME"
+            onkeydown="key();"
+            placeholder="First Name"
+            required
+          />
+        </div>
+        <div class="input-field">
+          <input
+            type="text"
+            name="LASTNAME"
+            id="LASTNAME"
+            onkeydown="key();"
+            placeholder="Last Name"
+            required
+          />
+        </div>
+        <div class="input-field">
+          <input
+            type="text"
+            name="EMPID"
+            id="EMPID"
+            placeholder="Employee id"
+            required
+          />
+        </div>
+        <div class="input-field">
+          <input
+            type="email"
+            name="EMAIL"
+            id="EMAIL"
+            placeholder="Email"
+            required
+          />
+        </div>
+        <div class="content">
+          <select
+            name="GENDER"
+            id="GENDER"
+            required
+            style="padding: 10px; background: #edf2ff; border: none"
+          >
+            <option value="" selected disabled>--GENDER--</option>
+            <option value="MALE">MALE</option>
+            <option value="FEMALE">FEMALE</option>
+          </select>
+
+          <select
+            name="DEPARTMENT"
+            id="DEPARTMENT"
+            required
+            style="padding: 10px; background: #edf2ff; border: none"
+          >
+            <option value="" selected disabled>--DEPARTMENT--</option>
+            <option value="DESIGN">DESIGN</option>
+            <option value="CODING">CODING</option>
+            <option value="TESTING">TESTING</option>
+            <option value="HUMAN RESOURCE">HUMAN RESOURCE</option>
+            <option value="MAINTANANCE">MAINTANANCE</option>
+          </select>
+        </div>
+
+        <div class="input-field">
+          <input
+            type="textarea"
+            name="ADDRESS"
+            id="ADDRESS"
+            cols="5"
+            placeholder="Address"
+            required
+          />
+        </div>
+
+        <div class="input-field">
+          <input
+            type="password"
+            name="PASSWORD"
+            id="PASSWORD"
+            onkeydown="key();"
+            placeholder="Password"
+            required
+          />
+        </div>
+        <div class="input-field">
+          <input
+            type="password"
+            name="CPASSWORD"
+            id="CPASSWORD"
+            onkeydown="key();"
+            placeholder="Confrim password"
+            required
+          />
+        </div>
+      </div>
+      <div class="action">
+        <button
+          id="submit"
+          onclick="passwordverify();"
+          >
+          submit
+        </button>
+      </div>
+    </form>
+  </body>
+</html>
